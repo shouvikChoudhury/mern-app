@@ -16,12 +16,12 @@ const AccountList = ({ accounts }) => {
                   You have not created any accounts yet. Click the button below
                   to create one.
                 </p>
-                <a
-                  href="/dashboard/accounts/create"
+                <Link
+                  to="/dashboard/accounts/create"
                   className="px-6 py-3 text-lg font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
                 >
                   Create Account
-                </a>
+                </Link>
               </>
             ) : (
               <>
