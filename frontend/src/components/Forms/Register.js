@@ -36,6 +36,11 @@ const Register = () => {
               <h3 className="mb-4 text-2xl md:text-3xl font-bold">
                 Register for an account
               </h3>
+              <p>
+                {error && (
+                  <span className="text-red-500">{error}</span>
+                )}
+              </p>
             </div>
             <form onSubmit={onSubmitHandler}>
               <div className="mb-6">
