@@ -56,8 +56,7 @@ export default function AccountDetails() {
                   {account?.name}
                 </h2>
                 <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Repellendus repellat laudantium.
+                  {account?.notes}
                 </p>
               </div>
             </div>

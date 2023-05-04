@@ -63,6 +63,12 @@ const AccountList = ({ accounts }) => {
                           <h3 className="text-lg md:text-xl text-coolGray-800 group-hover:text-coolGray-900 font-semibold">
                             {acc?.name}
                           </h3>
+                          <a
+                            href="#"
+                            className="text-indigo-600 hover:text-indigo-900"
+                          >
+                            Delete
+                          </a>
                         </div>
                         <Link to={`/account-details/${acc?._id}`}>
                           <div className="w-full md:w-1/2 md:text-right">
