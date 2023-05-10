@@ -7,6 +7,7 @@ import Login from "./components/Forms/Login";
 import Register from "./components/Forms/Register";
 import HomePage from "./components/HomePage/HomePage";
 import Navbar from "./components/Navbar/Navbar";
+import EditTransaction from "./components/Forms/EditTransaction";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           element={<AccountDetails />}
         />
         <Route path="/dashboard/accounts/create" element={<AddAccount />} />
+        <Route path="/edit-transaction/:transactionID" element={<EditTransaction />} />
       </Routes>
     </BrowserRouter>
   );

@@ -73,14 +73,8 @@ export const AccountContextProvider = ({ children }) => {
 
   //Get account Details action
   const getAccountDetailsAction = async id => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${state?.userauth?.token}`,
-        "Content-Type": "application/json",
-      },
-    };
     try {
-      const res = await axios.get(`${API_URL_ACC}/${id}`, config);
+      const res = await axios.get(`${API_URL_ACC}/${id}`);
 
       if (res?.data?.status === "success") {
         //dispatch
@@ -99,15 +93,17 @@ export const AccountContextProvider = ({ children }) => {
 
   //Create account Details action
   const createAccountAction = async formData => {
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${state?.userAuth?.token}`,
-      },
-    };
     try {
+      //header
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${state?.userAuth?.token}`,
+        },
+      };
+      //request
       const res = await axios.post(`${API_URL_ACC}`, formData, config);
+
       if (res?.data?.status === "success") {
         //dispatch
         dispatch({

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const AllTransactions = ({ transactions, accountID }) => {
+
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8">
@@ -67,7 +68,7 @@ const AllTransactions = ({ transactions, accountID }) => {
                     {transactions?.map(transaction => {
                       return (
                         <tr
-                          key={transaction?.email}
+                          key={transaction?.id}
                           className={transaction?.color}
                         >
                           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
@@ -94,15 +95,12 @@ const AllTransactions = ({ transactions, accountID }) => {
                             {transaction?.notes}
                           </td>
                           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <a
-                              href="#"
+                            <Link
+                              to={`/edit-transaction/${transaction?._id}`}
                               className="text-indigo-600 hover:text-indigo-900"
                             >
-                              Edit
-                              <span className="sr-only">
-                                , {transaction?.name}
-                              </span>
-                            </a>
+                              - Edit -
+                            </Link>
                           </td>
                         </tr>
                       );

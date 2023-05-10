@@ -96,7 +96,7 @@ export default function AccountDetails() {
                           Total Income
                         </dt>
                         <dd className=" text-5xl font-bold tracking-tight text-green-600">
-                          ${totalIncome + account?.initialBalance}
+                          $ {totalIncome + account?.initialBalance}
                         </dd>
                         <Link
                           to={`/income-list/`}
