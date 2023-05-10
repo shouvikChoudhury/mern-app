@@ -51,7 +51,7 @@ const getTransactionsCtrl = async (req, res, next) => {
 };
 
 //single
-const getTransactionCtrl = async (req, res) => {
+const getTransactionCtrl = async (req, res, next) => {
     try {
         const { id } = req.params;
         const tran = await Transaction.findById(id);
