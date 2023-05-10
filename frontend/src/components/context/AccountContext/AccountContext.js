@@ -5,7 +5,7 @@ import {
   ACCOUNT_DETAILS_SUCCESS,
   ACCOUNT_DETAILS_FAIL,
   ACCOUNT_CREATION_SUCCESS,
-  ACCOUNT_CREATION_FAIL,
+  ACCOUNT_CREATION_FAIL, ACCOUNT_DELETE_FAIL, ACCOUNT_DELETE_SUCCESS
 } from "./accountActionTypes";
 
 export const accountContext = createContext();
@@ -53,6 +53,15 @@ const accountReducer = (state, action) => {
         loading: false,
         error: payload,
       };
+    // DELETE
+    case ACCOUNT_DELETE_SUCCESS:
+      return {
+        ...state,
+        account: payload,
+        loading: false,
+        error: null,
+      };
+    case ACCOUNT_DELETE_FAIL:
     default:
       return state;
   }
@@ -61,7 +70,7 @@ const accountReducer = (state, action) => {
 //Provider
 export const AccountContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(accountReducer, INITIAL_STATE);
-  console.log(state);
+
   //Get account Details action
   const getAccountDetailsAction = async id => {
     const config = {
@@ -90,7 +99,7 @@ export const AccountContextProvider = ({ children }) => {
 
   //Create account Details action
   const createAccountAction = async formData => {
-    console.log(state?.userAuth);
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -109,9 +118,32 @@ export const AccountContextProvider = ({ children }) => {
       //Redirect
       window.location.href = "/dashboard";
     } catch (error) {
-      console.log(error);
+
       dispatch({
         type: ACCOUNT_CREATION_FAIL,
+        payload: error?.data?.response?.message,
+      });
+    }
+  };
+
+  //delete account Details action
+  const deleteAccountDetailsAction = async id => {
+    try {
+      const res = await axios.delete(`${API_URL_ACC}/${id}`);
+
+      if (res?.data?.status === "success") {
+        console.log(res?.data?.data)
+        //dispatch
+        dispatch({
+          type: ACCOUNT_DELETE_SUCCESS,
+          payload: res?.data?.data,
+        });
+      }
+      //Redirect
+      window.location.href = "/dashboard";
+    } catch (error) {
+      dispatch({
+        type: ACCOUNT_DELETE_FAIL,
         payload: error?.data?.response?.message,
       });
     }
@@ -122,7 +154,7 @@ export const AccountContextProvider = ({ children }) => {
         getAccountDetailsAction,
         account: state?.account,
         createAccountAction,
-        error: state?.error,
+        error: state?.error, deleteAccountDetailsAction
       }}
     >
       {children}

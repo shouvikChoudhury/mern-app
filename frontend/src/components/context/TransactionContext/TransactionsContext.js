@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from "react";
 import axios from "axios";
 import {
   TRANSACTION_CREATION_SUCCESS,
-  TRANSACTION_CREATION_FAIL,
+  TRANSACTION_CREATION_FAIL
 } from "./transactionsActionTypes";
 import { API_URL_TRANSACTION } from "../../../utils/apiURL";
 
@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   error: null,
   token: JSON.parse(localStorage.getItem("userAuth")),
 };
+
 const transactionReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -50,7 +51,7 @@ export const TransactionContextProvider = ({ children }) => {
       };
       //request
       const res = await axios.post(API_URL_TRANSACTION, accountData, config);
-      console.log(res);
+
       if (res?.data?.status === "success") {
         dispatch({
           type: TRANSACTION_CREATION_SUCCESS,
@@ -58,7 +59,7 @@ export const TransactionContextProvider = ({ children }) => {
         });
       }
       //Redirect
-      window.location.href = "/dashboard";
+      window.location.href = `/account-details/${accountData.account}`;
     } catch (error) {
       dispatch({
         type: TRANSACTION_CREATION_FAIL,
@@ -66,13 +67,14 @@ export const TransactionContextProvider = ({ children }) => {
       });
     }
   };
+
   return (
     <transactionContext.Provider
       value={{
         transaction: state.transaction,
         transactions: state.transactions,
         createTransactionAction,
-        error: state?.error,
+        error: state?.error
       }}
     >
       {children}

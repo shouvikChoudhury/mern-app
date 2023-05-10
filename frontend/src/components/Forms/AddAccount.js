@@ -83,7 +83,7 @@ export default function AddAccount() {
                   <option value="Checking">Checking</option>
                   <option value="Credit Card">Credit Card</option>
                   <option value="Utilities">Utilities</option>
-                  <option value="Builing">Builing</option>
+                  <option value="Building">Building</option>
                   <option value="Travel">Travel</option>
                   <option value="Education">Education</option>
                   <option value="Personal">Personal</option>

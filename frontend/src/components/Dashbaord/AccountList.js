@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { accountContext } from "../context/AccountContext/AccountContext";
 
 const AccountList = ({ accounts }) => {
+  const { deleteAccountDetailsAction, error } = useContext(accountContext);
   return (
     <>
       <section className="py-24 bg-white">
@@ -63,7 +66,7 @@ const AccountList = ({ accounts }) => {
                           <h3 className="text-lg md:text-xl text-coolGray-800 group-hover:text-coolGray-900 font-semibold">
                             {acc?.name}
                           </h3>
-                          <a
+                          <a onClick={e => deleteAccountDetailsAction(acc?._id)}
                             href="#"
                             className="text-indigo-600 hover:text-indigo-900"
                           >
